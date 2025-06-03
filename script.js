@@ -41,5 +41,26 @@
       e.preventDefault();
       navLinks.classList.toggle('show');
     }
+  });<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  (function () {
+    emailjs.init("ub6pp01lQVz2Vnn_S"); // Replace with your actual Public Key
+  })();
+
+  document.getElementById("contact-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    emailjs.sendForm(
+      "service_1025031",    // Replace with your EmailJS service ID
+      "template_mee27wf",   // Replace with your EmailJS template ID
+      this
+    ).then(
+      function () {
+        document.getElementById("status-message").textContent = "Message sent successfully!";
+        document.getElementById("contact-form").reset();
+      },
+      function (error) {
+        document.getElementById("status-message").textContent = "Failed to send message. Please try again.";
+        console.error("EmailJS error:", error);
+      }
+    );
   });
-  emailjs.sendForm('service_1025031', 'template_mee27wf', form, 'ub6pp01lQVz2Vnn_S')
